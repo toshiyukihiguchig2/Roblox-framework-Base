@@ -1,0 +1,71 @@
+This repository is a Roblox game framework for shipping many games (genre per game).
+
+Layers:
+
+- **core** = base libraries (Packages, ServerPackages — Knit, Fusion, Wally, ProfileStore)
+- **framework** = common engine (src/framework: client, server, shared, ui)
+- **games** = per-game code (src/games/<genre>: server, client, shared per genre)
+
+Project structure (filesystem → Roblox):
+
+Packages → ReplicatedStorage/Packages
+ServerPackages → ServerScriptService/ServerPackages
+
+src/framework/shared → ReplicatedStorage/FrameworkShared
+src/games/<game>/shared → ReplicatedStorage/GameShared
+
+src/framework/server → ServerScriptService/Framework
+src/games/<game>/server → ServerScriptService/Game
+
+src/framework/client → StarterPlayer/StarterPlayerScripts/Framework
+src/games/<game>/client → StarterPlayer/StarterPlayerScripts/Game
+
+src/framework/ui → StarterGui/MainGui
+
+Which game is synced is determined by the Rojo project file (default = obby; use tycoon.project.json, simulator.project.json, tower-defense.project.json for other games).
+
+
+Architecture rules:
+
+Framework (src/framework):
+- shared: modules, utils, types used by both client and server
+- server: Knit Services, systems, managers; entry = init.server.luau (loads Framework + Game services)
+- client: Knit Controllers, utils; entry = init.client.luau (loads Framework + Game controllers)
+- ui: Fusion UI (bootstrap, App, components, screens)
+
+Games (src/games/<genre>):
+- shared: config, modules used only by that game
+- server: services/, systems/ (Knit services go in services; plain modules in systems)
+- client: controllers/ (Knit controllers only)
+
+
+Knit conventions:
+
+- Services live in framework/server/services/ or games/<game>/server/services/
+- Controllers live in framework/client/controllers/ or games/<game>/client/controllers/
+- Init scripts load both Framework and Game (if Game exists) via FindFirstChild("Game")
+
+
+Shared require paths:
+
+- Framework shared: ReplicatedStorage.FrameworkShared.modules / .utils / .types
+- Game shared: ReplicatedStorage.GameShared.config / etc.
+
+
+Coding rules:
+
+- All modules must return a table
+- Avoid global variables
+- Prefer dependency injection
+- Use Promise for async flows
+- Use Signal for events
+- Use Trove for cleanup
+- Client-callable Service methods: always validate player and parameters on the server; never trust client input alone
+- Event connections (Remote, Bindable): add to Trove so they are disconnected on cleanup
+
+
+When generating new code:
+
+- Respect the Rojo folder mapping
+- Put framework-agnostic code in src/framework; game-specific code in src/games/<genre>
+- Follow the Knit architecture

@@ -1,0 +1,2 @@
+--[[ simulator/shared/config ]]
+return {}

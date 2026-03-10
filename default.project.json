@@ -4,8 +4,11 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
-      "Shared": {
-        "$path": "src/shared"
+      "FrameworkShared": {
+        "$path": "src/framework/shared"
+      },
+      "GameShared": {
+        "$path": "src/games/obby/shared"
       },
       "Packages": {
         "$path": "Packages"
@@ -13,8 +16,11 @@
     },
 
     "ServerScriptService": {
-      "Server": {
-        "$path": "src/server"
+      "Framework": {
+        "$path": "src/framework/server"
+      },
+      "Game": {
+        "$path": "src/games/obby/server"
       },
       "ServerPackages": {
         "$path": "ServerPackages"
@@ -23,8 +29,11 @@
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
-        "Client": {
-          "$path": "src/client"
+        "Framework": {
+          "$path": "src/framework/client"
+        },
+        "Game": {
+          "$path": "src/games/obby/client"
         }
       }
     },
@@ -36,7 +45,7 @@
           "ResetOnSpawn": false,
           "ZIndexBehavior": "Sibling"
         },
-        "$path": "src/ui"
+        "$path": "src/framework/ui"
       }
     },
 
