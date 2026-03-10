@@ -15,7 +15,7 @@ local trove = Trove.new()
 App(scope, script.Parent)
 
 -- スクリプトが親から外れたらクリーンアップ（プレイヤー離脱など）
-trove:Connect(script, "AncestryChanged", function()
+trove:Connect(script.AncestryChanged, function()
 	if not script:IsDescendantOf(game) then
 		Fusion.doCleanup(scope)
 		trove:Destroy()

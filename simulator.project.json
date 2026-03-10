@@ -5,20 +5,29 @@
 
     "ReplicatedStorage": {
       "FrameworkShared": { "$path": "src/framework/shared" },
-      "GameShared": { "$path": "src/games/simulator/shared" },
+      "simulator": {
+        "$className": "Folder",
+        "Shared": { "$path": "src/games/simulator/shared" }
+      },
       "Packages": { "$path": "Packages" }
     },
 
     "ServerScriptService": {
-      "Framework": { "$path": "src/framework/server" },
-      "Game": { "$path": "src/games/simulator/server" },
+      "FrameworkServer": { "$path": "src/framework/server" },
+      "simulator": {
+        "$className": "Folder",
+        "Server": { "$path": "src/games/simulator/server" }
+      },
       "ServerPackages": { "$path": "ServerPackages" }
     },
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Framework": { "$path": "src/framework/client" },
-        "Game": { "$path": "src/games/simulator/client" }
+        "simulator": {
+          "$className": "Folder",
+          "Client": { "$path": "src/games/simulator/client" }
+        }
       }
     },
 

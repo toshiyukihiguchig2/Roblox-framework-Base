@@ -7,8 +7,11 @@
       "FrameworkShared": {
         "$path": "src/framework/shared"
       },
-      "GameShared": {
-        "$path": "src/games/obby/shared"
+      "obby": {
+        "$className": "Folder",
+        "Shared": {
+          "$path": "src/games/obby/shared"
+        }
       },
       "Packages": {
         "$path": "Packages"
@@ -16,11 +19,14 @@
     },
 
     "ServerScriptService": {
-      "Framework": {
+      "FrameworkServer": {
         "$path": "src/framework/server"
       },
-      "Game": {
-        "$path": "src/games/obby/server"
+      "obby": {
+        "$className": "Folder",
+        "Server": {
+          "$path": "src/games/obby/server"
+        }
       },
       "ServerPackages": {
         "$path": "ServerPackages"
@@ -32,8 +38,11 @@
         "Framework": {
           "$path": "src/framework/client"
         },
-        "Game": {
-          "$path": "src/games/obby/client"
+        "obby": {
+          "$className": "Folder",
+          "Client": {
+            "$path": "src/games/obby/client"
+          }
         }
       }
     },

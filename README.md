@@ -84,8 +84,8 @@ Studio の Rojo プラグインで「Sync」するときも、あらかじめ同
 
 | ファイル | 役割 |
 |----------|------|
-| `src/framework/client/init.client.luau` | Framework + 選択中ゲームの Controller を読み込み、Knit 起動 |
-| `src/framework/server/init.server.luau` | Framework + 選択中ゲームの Service を読み込み、Knit 起動 |
+| `src/framework/client/bootstrap.client.luau` | Framework + 選択中ゲームの Controller を読み込み、Knit 起動 |
+| `src/framework/server/bootstrap.server.luau` | Framework + 選択中ゲームの Service を読み込み、Knit 起動 |
 
 ### 2. 新規ゲーム（ジャンル）を追加する
 
@@ -96,21 +96,21 @@ Studio の Rojo プラグインで「Sync」するときも、あらかじめ同
 3. **システム・設定**:
    - サーバー用の普通モジュール: `server/systems/<名前>System.lua`
    - 共通設定: `shared/config/<名前>Config.lua`
-4. **プロジェクトファイルを追加**: `default.project.json` をコピーし、`Game` と `GameShared` の `$path` を `src/games/<ジャンル>/server`、`.../client`、`.../shared` に合わせた `<ジャンル>.project.json` を作成する。
+4. **プロジェクトファイルを追加**: `default.project.json` をコピーし、`<ジャンル>` 用のノード（`<ジャンル>/Shared`、`<ジャンル>/Server`、`<ジャンル>/Client`）の `$path` を `src/games/<ジャンル>/shared`、`.../server`、`.../client` に合わせた `<ジャンル>.project.json` を作成する。
 
 ### 3. 既存ゲームに Service / Controller を追加する
 
 - **Service**: `src/framework/server/_templates/ServiceTemplate.lua` をコピー → `src/games/<ジャンル>/server/services/<名前>Service.lua` に置き、名前を変更。
 - **Controller**: `src/framework/client/_templates/ControllerTemplate.lua` をコピー → `src/games/<ジャンル>/client/controllers/<名前>Controller.lua` に置き、名前を変更。
 
-init の修正は不要です（Framework の init が Game の services / controllers を自動で読み込みます）。
+init の修正は不要です（Framework の bootstrap が `<game>/Server` の services と `<game>/Client` の controllers を自動で読み込みます）。
 
 ### 4. 共通コードの参照
 
 | 種類 | 参照例 |
 |------|--------|
 | Framework 共通 | `ReplicatedStorage.FrameworkShared.modules.X` / `.utils` / `.types` |
-| ゲーム固有 | `ReplicatedStorage.GameShared.config.X` 等 |
+| ゲーム固有 | `ReplicatedStorage.<game>.Shared.config.X`（例: `ReplicatedStorage.obby.Shared.config.X`） |
 
 ### 5. UI（Fusion）
 
@@ -134,11 +134,11 @@ UI は **framework** 側のみです（`src/framework/ui`）。
 | フォルダ / パス | Roblox 上の場所 |
 |-----------------|------------------|
 | `src/framework/shared` | ReplicatedStorage/FrameworkShared |
-| `src/games/<game>/shared` | ReplicatedStorage/GameShared |
-| `src/framework/server` | ServerScriptService/Framework |
-| `src/games/<game>/server` | ServerScriptService/Game |
+| `src/games/<game>/shared` | ReplicatedStorage/<game>/Shared |
+| `src/framework/server` | ServerScriptService/FrameworkServer |
+| `src/games/<game>/server` | ServerScriptService/<game>/Server |
 | `src/framework/client` | StarterPlayerScripts/Framework |
-| `src/games/<game>/client` | StarterPlayerScripts/Game |
+| `src/games/<game>/client` | StarterPlayerScripts/<game>/Client |
 | `src/framework/ui` | StarterGui/MainGui |
 | `Packages` | ReplicatedStorage/Packages |
 | `ServerPackages` | ServerScriptService/ServerPackages |

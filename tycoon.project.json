@@ -5,20 +5,29 @@
 
     "ReplicatedStorage": {
       "FrameworkShared": { "$path": "src/framework/shared" },
-      "GameShared": { "$path": "src/games/tycoon/shared" },
+      "tycoon": {
+        "$className": "Folder",
+        "Shared": { "$path": "src/games/tycoon/shared" }
+      },
       "Packages": { "$path": "Packages" }
     },
 
     "ServerScriptService": {
-      "Framework": { "$path": "src/framework/server" },
-      "Game": { "$path": "src/games/tycoon/server" },
+      "FrameworkServer": { "$path": "src/framework/server" },
+      "tycoon": {
+        "$className": "Folder",
+        "Server": { "$path": "src/games/tycoon/server" }
+      },
       "ServerPackages": { "$path": "ServerPackages" }
     },
 
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Framework": { "$path": "src/framework/client" },
-        "Game": { "$path": "src/games/tycoon/client" }
+        "tycoon": {
+          "$className": "Folder",
+          "Client": { "$path": "src/games/tycoon/client" }
+        }
       }
     },
 
