@@ -42,3 +42,6 @@ luac.out
 # Wally packages (install via `wally install`)
 Packages/
 ServerPackages/
+
+# Claude Code local settings
+.claude/settings.local.json
